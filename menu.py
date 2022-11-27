@@ -32,7 +32,7 @@ def menu():
         elif opcion == 2:
             # Título
             print("\nOPCIÓN:  Extraer mensaje oculto de una imagen")
-            extraer_oculto(img_modificada)
+
         #si es tres
         elif opcion == 3:
             # Título
@@ -56,8 +56,8 @@ def menu():
 def texto_oculto():
 
     #Declaramos primero las imágenes que usaremos
-    original = 'proyimag1T.png'
-    oculta = 'proyimod1T.png'
+    original = '..\img\proyimag1T.png'
+    oculta = '..\img\proyimod1T.png'
     #Con ayuda del cv2 haemos que nos lea la imagen
     img_ori = cv2.imread(original)
     #Aquí le decimos que lea el alto y el ancho
