@@ -11,29 +11,6 @@ from PIL import Image
 import cv2 as cv2
 from stegano import lsb
 
-'''
-original = 'proyimag1T.png'
-oculta = 'proyimod1T.png'
-print("OPCIÓN: Insertar mensaje oculto en una imagen")
-img_ori = cv2.imread(original)
-wid = img_ori.shape[1]
-hgt = img_ori.shape[0]
-print(f'proyimag1T tiene {str(wid)} de ancho y de {str(hgt)} alto')
-cv2.imshow('Imagen original',img_ori)
-cv2.waitKey(0)
-men_secreto= input('Introduzca el mesanje de texto a ocultar: ')
-secret = lsb.hide(original, men_secreto).save(oculta)
-print('Insertando texto en la imagen...')
-
-ori_img = Image.open(original)
-ocul_img = Image.open(oculta)
-if ori_img != ocul_img:
-    img_oculta = cv2.imread(oculta)
-    cv2.imshow('Con texto oculto', img_oculta)
-    cv2.waitKey(0)
-    print('El fichero proyimag1T.png es diferente a proyimod1T.png')
-
-'''
 #Declaramos primero las imágenes que usaremos
 original = 'proyimag1T.png'
 oculta = 'proyimod1T.png'
