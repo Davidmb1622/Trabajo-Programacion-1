@@ -32,7 +32,7 @@ def menu():
         elif opcion == 2:
             # Título
             print("\nOPCIÓN:  Extraer mensaje oculto de una imagen")
-            extraer_oculto(oculta)
+            extraer_oculto()
         #si es tres
         elif opcion == 3:
             # Título
@@ -56,15 +56,15 @@ def menu():
 def texto_oculto():
 
     #Declaramos primero las imágenes que usaremos
-    original = 'img/proyimag1T.png'
-    oculta = 'img/proyimod1T.png'
+    original = 'proyimag1T.png'
+    oculta = 'proyimod1T.png'
     #Con ayuda del cv2 haemos que nos lea la imagen
     img_ori = cv2.imread(original)
     #Aquí le decimos que lea el alto y el ancho
     wid = img_ori.shape[1]
     hgt = img_ori.shape[0]
     #Y aquí que imprima esos datos
-    print(f'\nproyimag1T tiene {str(wid)} de ancho y de {str(hgt)} alto')
+    print(f'\n{original} tiene {str(wid)} de ancho y de {str(hgt)} alto')
     #Mostramos la imágen en una ventana emergente
     cv2.imshow('Imagen original', img_ori)
     #El waitKey nos permite mantener la imagen hasta que cerremos la ventana
@@ -81,24 +81,26 @@ def texto_oculto():
     ocul_img = Image.open(oculta)
     #Si la original es distinta a la de la imagen oculta entonces
     if ori_img != ocul_img:
-        #Leemos la imagen que oculta el texto con cv2
+        #Leemos la imagen que oculta el texto con cv2 e indicamos que el fichero es distinto
         img_oculta = cv2.imread(oculta)
+        print(f'\nEl fichero {original} es diferente a {oculta}')
         #Para poder mostrarla por la ventana emergente
         cv2.imshow('Con texto oculto', img_oculta)
         #Le pedimos que espere hasta que nosotros la cerremos
         cv2.waitKey(0)
-        #el fichero es distinto
-        print('\nEl fichero proyimag1T.png es diferente a proyimod1T.png')
+
     return oculta
 
 
 def extraer_oculto():
     print('')
+    #la imagen con el texto oculto anterior lo traemos
     print(f'El fichero de la imagen con texto oculto se llama: {oculta}')
+    #revelamos su secreto y lo imprimimos
     m_secret = lsb.reveal(oculta)
     print('Exrayendo el texto de la imagen...')
     print(f'El texto oculto es: {m_secret}')
-
+    #por último guardamos el secreto en un fihero llamado extracción.txt
     with open('extraccion.txt', 'w+') as secreto:
         secreto.write(m_secret)
 
