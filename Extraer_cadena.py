@@ -14,16 +14,19 @@ img_texto.show()
 with open('extraccion.txt', 'a+') as extraido:
     extraido.write(text[:-1])
 '''
-imagen = 'imagtext1T.png'
-img_abierta = Image.open(imagen)
 
+#tenemos nuestra imagen
+imagen = 'imagtext1T.png'
+print(f'El fichero de la imagen se llama: {imagen}')
+#la abrimos
+img_abierta = Image.open(imagen)
+print('Extrayendo el texto de la imagen...')
 path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 pytesseract.tesseract_cmd = path_to_tesseract
 
-text = pytesseract.image_to_string(img_abierta)
-
-print(type(text[:-1]))
-print(text[:-5])#Tiene unos espacios feos que hay que quitar
-print(type(text))
-print(text)
+text = pytesseract.image_to_string(img_abierta)[:-5]
+print(f'El texto recuperado es: {text}.')
+with open('extraccion.txt', 'a+') as secreto:
+    secreto.writelines(f'-> Extracción del Texto stampado en la imagen'
+                       f'\n{text}.')
 

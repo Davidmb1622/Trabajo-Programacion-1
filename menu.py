@@ -5,7 +5,8 @@ from PIL import Image
 import cv2 as cv2
 #stegano nos permite introducir secretos y descifrarlos
 from stegano import lsb
-
+#permite la extracción de cadenas de caracteres de una imagen
+from pytesseract import pytesseract
 
 
 #Definimos el menu de nuestro proyecto
@@ -44,6 +45,8 @@ def menu():
             # Título
             print("\nOPCIÓN:Informe de las extracciones (PDF)")
         elif opcion == '6':
+            print('Saliendo')
+            #en esta opción sale del menu y termina el programa
             break
         else:
             print('\nSólo se aceptan número incluidos dentro del menú\n')
@@ -102,17 +105,46 @@ def extraer_oculto(oculta):
     print(f'El texto oculto es: {m_secret}')
     #por último guardamos el secreto en un fihero llamado extracción.txt
     with open('extraccion.txt', 'w+') as secreto:
-        secreto.write(m_secret)
+        secreto.writelines(f'-> Extracción del Texto Oculto\n{m_secret}.')
 
 
 def escala_gris():
-
-
+    #tenemos la imagen
+    original = 'proyimag1T.png'
+    print(f"\nEl fichero de la imagen se llama: {original}")
+    print("\nConvirtiendo la imagen a escala de grises...")
+    # abrimos la imagen
+    imag_gris = cv2.imread(original)
+    # la convertimos a grises
+    gris = cv2.cvtColor(imag_gris, cv2.COLOR_BGR2GRAY)
+    #la abrimos
+    cv2.imshow('Escala de grises', gris)
+    cv2.waitKey(0)
+    # la guardamos en proyimgr1T.png
+    grises = cv2.imwrite('proyimgr1T.png', gris)
+    print(f"El fichero de la imagen en grises: proyimgr1T.png")
 
 def extraer_cadena():
-
+    #declaramos la imagen
+    imagen = 'imagtext1T.png'
+    print(f'El fichero de la imagen se llama: {imagen}')
+    #la abrimos
+    img_abierta = Image.open(imagen)
+    print('Extrayendo el texto de la imagen...')
+    #le decimos al programa de donde esta nuestra funciona de extracción y que la ejecute
+    path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    pytesseract.tesseract_cmd = path_to_tesseract
+    #pasamos la ejecución a una variable
+    text = pytesseract.image_to_string(img_abierta)[:-5]#le ponemos esto porque a la imagen le sobra espacios
+    print(f'El texto recuperado es: {text}.')
+    with open('extraccion.txt', 'a+') as secreto:
+        secreto.writelines(f'-> Extracción del Texto stampado en la imagen'
+                           f'\n{text}.')
 
 def extr_pdf():
+
+
+
 
 
 if __name__ == "__main__":
