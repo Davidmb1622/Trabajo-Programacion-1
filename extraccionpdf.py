@@ -1,32 +1,45 @@
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-from reportlab.lib.utils import ImageReader
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from PIL import Image
+from datetime import datetime
+
 
 #como tenemso que tener la pagina en A4
 w, h = A4
 c = canvas.Canvas("extracciones.pdf", pagesize=A4)
-
-#imagen
-c.drawImage('cabimtex.png', 50, h - 200, width=50, height=50)
-c = canvas.Canvas("cabimtex.png", pagesize=A4)
-# Ubicar el logo en el extremo superior izquierdo.
-img = ImageReader("cabimtex.png")
-# Obtener el ancho y alto de la imagen.
-img_w, img_h = img.getSize()
-# h - img_h es el alto de la hoja menos el alto
-# de la imagen.
-c.drawImage(img, 0, h - img_h)
-c.save()
-
+print(A4)
+#abrir imagen para que la reconozca
+Image.open('cabimtex.png')
+c.drawImage('cabimtex.png', 130, 600, 315, 170)
 #textos
 #titulo
-c.drawString(50, h - 50, "INFORME DE LAS EXTRACCIONES")
-#CUERPO DE TEXTO COMPELTO
+c.setFont('Helvetica-Bold', 20)
+c.drawString(120, 570, "INFORME DE LAS EXTRACCIONES")
 
-text = c.beginText(50, h - 50)
-c.setFont("Lora", 20)
-text.textLine('')
+#pie de página
+c.setFont('Helvetica', 12)
+c.drawString(500, 50,'Page#1')
 
+#texto oculto y extracción
+text= c.beginText(65,500)
+text.setFont('Helvetica', 12)
+text.textLines('-> Extracción del Texto Oculto\n'
+              'La pelota es roja.')
+text.textLines('-> Extracción del Texto estampado en la imagen\n'
+              'Los textos prescriptivos.')
+c.drawText(text)
+
+#extracciones de cadena de caracteres
+now = datetime.now()
+c.setFont('Helvetica', 12)
+c.drawString(65, 390, f"Las extracciones se realiaron el {now.date()}")
+c.drawString(65, 370, f"Las extracciones se realiaron el {now.date()}")
 
 c.showPage()
 c.save()
+
+
+#extraciones realizadas el
+

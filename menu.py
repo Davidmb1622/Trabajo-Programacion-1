@@ -105,7 +105,14 @@ def extraer_oculto(oculta):
         secreto.write(m_secret)
 
 
+def escala_gris():
 
+
+
+def extraer_cadena():
+
+
+def extr_pdf():
 
 
 if __name__ == "__main__":

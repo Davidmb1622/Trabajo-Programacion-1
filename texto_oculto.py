@@ -26,7 +26,7 @@ cv2.imshow('Imagen original', img_ori)
 # El waitKey nos permite mantener la imagen hasta que cerremos la ventana
 cv2.waitKey(0)
 # Pedimos al usuario que ponga el mensaje secreto que desee ocultar en la imagen
-men_secreto = input('\nIntroduzca el mesanje de texto a ocultar: ')
+men_secreto = input('\nIntroduzca el mesanje de texto a ocultar:  ', )
 # guardamos el mensaje secreto
 secret = lsb.hide(original, men_secreto).save(oculta)
 # e indicamos que estamos insertandolo
