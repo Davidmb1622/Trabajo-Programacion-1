@@ -32,7 +32,7 @@ def menu():
         elif opcion == 2:
             # Título
             print("\nOPCIÓN:  Extraer mensaje oculto de una imagen")
-
+            extraer_oculto(oculta)
         #si es tres
         elif opcion == 3:
             # Título
@@ -70,14 +70,14 @@ def texto_oculto():
     #El waitKey nos permite mantener la imagen hasta que cerremos la ventana
     cv2.waitKey(0)
     #Pedimos al usuario que ponga el mensaje secreto que desee ocultar en la imagen
-    men_secreto = input('\nIntroduzca el mesanje de texto a ocultar: ')
+    men_secreto = input('\nIntroduzca el mensaje de texto a ocultar: ')
     #guardamos el mensaje secreto
     secret = lsb.hide(original, men_secreto).save(oculta)
     #e indicamos que estamos insertandolo
     print('\nInsertando texto en la imagen...')
     #Para poder comparar los bytes de la imagenes usamos el método open importado de la libreria Image de PIL
+    # lo hacemos con la imagen original y con la imagen que tiene el mensaje oculto
     ori_img = Image.open(original)
-    #lo hacemos con la imagen original y con la imagen que tiene el mensaje oculto
     ocul_img = Image.open(oculta)
     #Si la original es distinta a la de la imagen oculta entonces
     if ori_img != ocul_img:
@@ -89,11 +89,18 @@ def texto_oculto():
         cv2.waitKey(0)
         #el fichero es distinto
         print('\nEl fichero proyimag1T.png es diferente a proyimod1T.png')
-    return
+    return oculta
 
 
 def extraer_oculto():
-    print('holi')
+    print('')
+    print(f'El fichero de la imagen con texto oculto se llama: {oculta}')
+    m_secret = lsb.reveal(oculta)
+    print('Exrayendo el texto de la imagen...')
+    print(f'El texto oculto es: {m_secret}')
+
+    with open('extraccion.txt', 'w+') as secreto:
+        secreto.write(m_secret)
 
 
 
