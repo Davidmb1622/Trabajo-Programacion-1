@@ -7,6 +7,12 @@ import cv2 as cv2
 from stegano import lsb
 #permite la extracción de cadenas de caracteres de una imagen
 from pytesseract import pytesseract
+#importamos esta biblioteca para crear el pdf en una hoja A4
+from reportlab.lib.pagesizes import A4
+#esta importación sirve para poder imprimir dentro del pdf
+from reportlab.pdfgen import canvas
+#para poder importar la fecha actual
+from datetime import datetime
 
 
 #Definimos el menu de nuestro proyecto
@@ -142,9 +148,31 @@ def extraer_cadena():
                            f'\n{text}.')
 
 def extr_pdf():
+    # como tenemos que tener la pagina en A4
+    w, h = A4
+    #creamos el pdf
+    c = canvas.Canvas("extracciones.pdf", pagesize=A4)
+    # abrir imagen para que la reconozca
+    Image.open('cabimtex.png')
+    #y la implementamos al pdf en estas coordenadas de la pagina
+    c.drawImage('cabimtex.png', 130, 600, 315, 170)
+    # textos
+    # titulo
+    c.setFont('Helvetica-Bold', 20)
+    c.drawString(120, 570, "INFORME DE LAS EXTRACCIONES")
+    #Textos del mensaje secreto y extracción
+    menutxt = c.beginText(65, 500)
+    menutxt.setFont('Helvetica', 12)
 
 
+    # pie de página al final de la página
+    c.setFont('Helvetica', 12)
+    c.drawString(500, 50, 'Page#1')
 
+    #para ver la pagina
+    c.showPage()
+    #esto nos salva lo que se le implementa a la página
+    c.save()
 
 
 if __name__ == "__main__":
