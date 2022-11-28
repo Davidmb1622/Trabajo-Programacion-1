@@ -6,7 +6,7 @@ from PIL import Image
 from datetime import datetime
 
 
-#como tenemso que tener la pagina en A4
+#como tenemos que tener la pagina en A4
 w, h = A4
 c = canvas.Canvas("extracciones.pdf", pagesize=A4)
 print(A4)
@@ -29,6 +29,9 @@ text.textLines('-> Extracción del Texto Oculto\n'
               'La pelota es roja.')
 text.textLines('-> Extracción del Texto estampado en la imagen\n'
               'Los textos prescriptivos.')
+with open('extraccionpdf.py', 'r+') as f:
+
+text.textLine('extraccion.txt')
 c.drawText(text)
 
 #extracciones de cadena de caracteres
