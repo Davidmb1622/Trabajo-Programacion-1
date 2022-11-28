@@ -22,16 +22,16 @@ def menu():
             '2) Extraer mensaje oculto de una imagen\n'
               )
         #Pedimos al usuario que elija una opción
-        opcion = int(input('Opción: '))
+        opcion = input('Opción: ')
         #si es uno
-        if opcion == 1:
+        if opcion == '1':
             # Título
             print("\nOPCIÓN: Insertar mensaje oculto en una imagen")
-            texto_oculto()
-        #si es dos
-        elif opcion == 2:
+            oculta = texto_oculto()
+        elif opcion == '2':
             # Título
             print("\nOPCIÓN:  Extraer mensaje oculto de una imagen")
+
             extraer_oculto(oculta)
         else:
             print('error')
@@ -43,7 +43,6 @@ def texto_oculto():
     img_ori = cv2.imread(original)
     men_secreto = input('\nIntroduzca el mensaje de texto a ocultar: ')
     secret = lsb.hide(original, men_secreto).save(oculta)
-
     return oculta
 
 #--------------------------

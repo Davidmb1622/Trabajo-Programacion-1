@@ -22,28 +22,28 @@ def menu():
             '6) Salir'
         )
         #Pedimos al usuario que elija una opción
-        opcion = int(input('Opción: '))
+        opcion = input('Opción: ')
         #si es uno
-        if opcion == 1:
+        if opcion == '1':
             # Título
             print("\nOPCIÓN: Insertar mensaje oculto en una imagen")
-            texto_oculto()
+            oculta=texto_oculto()
         #si es dos
-        elif opcion == 2:
+        elif opcion == '2':
             # Título
             print("\nOPCIÓN:  Extraer mensaje oculto de una imagen")
-            extraer_oculto()
+            extraer_oculto(oculta)
         #si es tres
-        elif opcion == 3:
+        elif opcion == '3':
             # Título
             print("\nOPCIÓN:  Convertir la imagen a escala de grises")
-        elif opcion == 4:
+        elif opcion == '4':
             # Título
             print("\nOPCIÓN:  Extraer cadena visible en una imagen")
-        elif opcion == 5:
+        elif opcion == '5':
             # Título
             print("\nOPCIÓN:Informe de las extracciones (PDF)")
-        elif opcion == 6:
+        elif opcion == '6':
             break
         else:
             print('\nSólo se aceptan número incluidos dentro del menú\n')
@@ -92,7 +92,7 @@ def texto_oculto():
     return oculta
 
 
-def extraer_oculto():
+def extraer_oculto(oculta):
     print('')
     #la imagen con el texto oculto anterior lo traemos
     print(f'El fichero de la imagen con texto oculto se llama: {oculta}')
