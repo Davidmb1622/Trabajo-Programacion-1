@@ -1,1 +1,4 @@
-La pelota es roja
+-> Extracción del Texto Oculto
+La pelota es roja.
+-> Extracción del Texto stampado en la imagen
+Los textos prescriptivos.

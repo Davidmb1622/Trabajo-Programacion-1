@@ -19,7 +19,7 @@ from datetime import datetime
 def menu():
     #mientras sea verdad
     while True:
-        #imprimir
+        #Menú que imprimiremos
         print('\n'
             '1) Insertar mensaje oculto en una imagen\n'
             '2) Extraer mensaje oculto de una imagen\n'
@@ -44,9 +44,11 @@ def menu():
         elif opcion == '3':
             # Título
             print("\nOPCIÓN:  Convertir la imagen a escala de grises")
+            escala_gris()
         elif opcion == '4':
             # Título
             print("\nOPCIÓN:  Extraer cadena visible en una imagen")
+            extraer_cadena()
         elif opcion == '5':
             # Título
             print("\nOPCIÓN:Informe de las extracciones (PDF)")
@@ -97,7 +99,7 @@ def texto_oculto():
         cv2.imshow('Con texto oculto', img_oculta)
         #Le pedimos que espere hasta que nosotros la cerremos
         cv2.waitKey(0)
-
+    #devolvemos la imagen obtenida para usarla en la segunda opción
     return oculta
 
 
@@ -111,12 +113,16 @@ def extraer_oculto(oculta):
     print(f'El texto oculto es: {m_secret}')
     #por último guardamos el secreto en un fihero llamado extracción.txt
     with open('extraccion.txt', 'w+') as secreto:
-        secreto.writelines(f'-> Extracción del Texto Oculto\n{m_secret}.')
+        secreto.writelines(f'-> Extracción del Texto Oculto\n'
+                           f'{m_secret}.')
 
 
 def escala_gris():
-    #tenemos la imagen
+    #tenemos la imagen original
     original = 'proyimag1T.png'
+    #Y la variable donde crearemos nuestra copia en grises
+    imggris = 'proyimgr1T.png'
+    #imprimimos
     print(f"\nEl fichero de la imagen se llama: {original}")
     print("\nConvirtiendo la imagen a escala de grises...")
     # abrimos la imagen
@@ -127,8 +133,9 @@ def escala_gris():
     cv2.imshow('Escala de grises', gris)
     cv2.waitKey(0)
     # la guardamos en proyimgr1T.png
-    grises = cv2.imwrite('proyimgr1T.png', gris)
-    print(f"El fichero de la imagen en grises: proyimgr1T.png")
+    grises = cv2.imwrite(imggris, gris)
+    #Imprimimos donde esta guardado
+    print(f"El fichero de la imagen en grises: {imggris}")
 
 def extraer_cadena():
     #declaramos la imagen
@@ -144,7 +151,7 @@ def extraer_cadena():
     text = pytesseract.image_to_string(img_abierta)[:-5]#le ponemos esto porque a la imagen le sobra espacios
     print(f'El texto recuperado es: {text}.')
     with open('extraccion.txt', 'a+') as secreto:
-        secreto.writelines(f'-> Extracción del Texto stampado en la imagen'
+        secreto.writelines(f'\n-> Extracción del Texto stampado en la imagen'
                            f'\n{text}.')
 
 def extr_pdf():
