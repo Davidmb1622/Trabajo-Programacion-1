@@ -115,9 +115,8 @@ def extraer_oculto(oculta):
     print('\n\t\tExrayendo el texto de la imagen...')
     print(f'\n\t\tEl texto oculto es: {m_secret}')
     #por último guardamos el secreto en un fihero llamado extracción.txt
-    with open('extraccion.txt', 'w+') as secreto:
-        secreto.writelines(f'-> Extracción del Texto Oculto\n'
-                           f'{m_secret}.')
+    with open('extraccion.txt', 'w') as secreto:
+        secreto.write(f'{m_secret}\n')
 
 
 def escala_gris():
@@ -153,9 +152,8 @@ def extraer_cadena():
     #pasamos la ejecución a una variable
     text = pytesseract.image_to_string(img_abierta)[:-5]#le ponemos esto porque a la imagen le sobra espacios
     print(f'\n\t\tEl texto recuperado es: {text}.')
-    with open('extraccion.txt', 'a+') as secreto:
-        secreto.writelines(f'\n-> Extracción del Texto estampado en la imagen'
-                           f'\n{text}.')
+    with open('extraccion.txt', 'a') as secreto:
+        secreto.write(f'{text}')
 
 def extr_pdf():
 
@@ -178,36 +176,29 @@ def extr_pdf():
     # extracción del documento txt
     # creamos una lista vacia para meter el texto oculto y el texto estampado
     cadenas = []
-    #Creamos una variable que sera donde empieze el texto de extraccion.txt
-    y = 500
-    # y2= 370
     #recorremos palabra por palabras hasta los saltos creando lineas
     for line in extrac.split('\n'):
-        #le damos tamaño y fuente a la letra
-        c.setFont("Helvetica", 12)
-        # dibujamos todas las lineas del documento en el pdf
-        c.drawString(65, y, line)
-        # con cada vuelta imprime 13 pixeles más abajo
-        y = y - 13
-        #si las lineas empiezan por -> ignorar
-        if not line.startswith('->'):
-            #añadimos a la lista las dos frases que necesitamos y las separamos en una variable
-            cadenas.append(line)
-            # c.drawString(65, y2, f"El texto oculto consta de {str(len(line))} caracteres")
-            # y2 = y2-20
-
-    # Extracciones de la cuenta de caracteres y palabras de ambos textos con la variable en donde se encuentran
-    # Ponemos en una variable la fecha del sistema
+        # añadimos a la lista las dos frases que necesitamos y las separamos en la variable
+        cadenas.append(line)
+    #le damos tamaño y fuente a la letra
+    c.setFont("Helvetica", 12)
+    # dibujamos todas las lineas del documento en el pdf
+    # Ponemos en una variable para la fecha del sistema
     fecha = datetime.now()
-    # declaramos el tamaño y la fuente de letra que usaremos
-    c.setFont('Helvetica', 12)
-    #definimos de donde sale la primera frase
+    #imprimimos las extracciones
+    c.drawString(65, 500, f"-> Extracción del Texto oculto")
+    #llamamos a la primera cadena
+    c.drawString(65, 487, f" {cadenas[0]}")
+    #imprimimos las extracciones
+    c.drawString(65, 474, f"-> Extracción del texto estampado en la imagen")
+    #Llamamos a la segunda cadena
+    c.drawString(65, 461, f"{cadenas[1]}")
     #imprimimos primero la fecha
     c.drawString(65, 400, f"Las extracciones se realiaron el {fecha.date()}.")
     #imprimimos la cantidad de caracteres del texto oculto
-    c.drawString(65, 370, f"El texto oculto consta de {len(cadenas[0][:-1])} caracteres.")
+    c.drawString(65, 370, f"El texto oculto consta de {len(cadenas[0])} caracteres.")
     # imprimimos la cantidad de caracteres del texto estampado
-    c.drawString(65, 350, f"El texto estampado consta de {len(cadenas[1][:-1])} caracteres.")
+    c.drawString(65, 350, f"El texto estampado consta de {len(cadenas[1])} caracteres.")
     # imprimimos la cantidad de palabras del texto oculto
     c.drawString(65, 330, f"El texto oculto está compuesto de {len(cadenas[0].split())} palabras.")
     # imprimimos la cantidad de palabras del texto estampado
