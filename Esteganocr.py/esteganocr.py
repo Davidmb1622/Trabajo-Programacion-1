@@ -112,7 +112,7 @@ def extraer_oculto(oculta):
     print(f'\n\t\tEl fichero de la imagen con texto oculto se llama: {oculta}')
     #revelamos su secreto y lo imprimimos
     m_secret = lsb.reveal(oculta)
-    print('\n\t\tExrayendo el texto de la imagen...')
+    print('\n\t\tExtrayendo el texto de la imagen...')
     print(f'\n\t\tEl texto oculto es: {m_secret}')
     #por último guardamos el secreto en un fihero llamado extracción.txt
     with open('extraccion.txt', 'w') as secreto:
@@ -151,7 +151,7 @@ def extraer_cadena():
     pytesseract.tesseract_cmd = path_to_tesseract
     #pasamos la ejecución a una variable
     text = pytesseract.image_to_string(img_abierta)[:-5]#le ponemos esto porque a la imagen le sobra espacios
-    print(f'\n\t\tEl texto recuperado es: {text}.')
+    print(f'\n\t\tEl texto recuperado es: {text}')
     with open('extraccion.txt', 'a') as secreto:
         secreto.write(f'{text}')
 
@@ -194,7 +194,7 @@ def extr_pdf():
     #Llamamos a la segunda cadena
     c.drawString(65, 461, f"{cadenas[1]}")
     #imprimimos primero la fecha
-    c.drawString(65, 400, f"Las extracciones se realiaron el {fecha.date()}.")
+    c.drawString(65, 400, f"Las extracciones se realizaron el {fecha.date()}.")
     #imprimimos la cantidad de caracteres del texto oculto
     c.drawString(65, 370, f"El texto oculto consta de {len(cadenas[0])} caracteres.")
     # imprimimos la cantidad de caracteres del texto estampado
